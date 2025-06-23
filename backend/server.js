@@ -18,5 +18,3 @@ app.listen(port, () => {
 app.get("/help", (req,res) => {
     res.status(200).send("Hi");
 })
-
-// mongodb+srv://olivertouki:rdShZGZoK9ZjOPS4@cluster0.nd4kwbz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
