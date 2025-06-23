@@ -18,5 +18,3 @@ app.listen(port, () => {
 app.get("/help", (req,res) => {
     res.status(200).send("Hi");
 })
-
-// REMOVED
