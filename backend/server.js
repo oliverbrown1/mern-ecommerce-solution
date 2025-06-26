@@ -1,6 +1,7 @@
 const loginRoutes = require("./routes/loginRoutes.js")
 const express = require('express')
 const connectDB = require("./config/database.js")
+const limiter = require("./middleware/ratelimiter.js")
 const app = express()
 const port = 3001
 
@@ -8,7 +9,8 @@ const port = 3001
 
 // middleware routes
 app.use(express.json());
-app.use("/test",loginRoutes);
+app.use(limiter)
+app.use("/auth",loginRoutes);
 
 // initiate DB connection
 connectDB();
