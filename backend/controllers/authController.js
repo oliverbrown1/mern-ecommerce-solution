@@ -10,7 +10,7 @@ const verifyToken = async (req, res, next) => {
     }
 
     // token might have "Bearer" prefix ??
-    if(token.startsWIth("Bearer ")){
+    if(token.startsWith("Bearer ")){
         token = token.slice(7, token.length)
     }
 
@@ -18,7 +18,7 @@ const verifyToken = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
 
         // test if we need to check if user exists in DB
-
+        req.user = decoded.uid
         next()
     }
     catch(error){
@@ -50,8 +50,8 @@ const signupUser = async (req, res) => {
 }
 const loginUser = async (req, res) => {
     try{
-        const { user, pwd } = req.body
-        const foundUser = await User.findOne({ username: user })
+        const { user, pwd } = req.body;
+        const foundUser = await User.findOne({ username: user });
         if(!foundUser){
             return res.status(404).json({message: "Username not recognised."})
         }
@@ -75,6 +75,11 @@ const loginUser = async (req, res) => {
     }
 
 
+}
+
+const logout = async (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({message: "You have successfully logged out"});
 }
 
 // const logoutUser = async (req, res) => {
