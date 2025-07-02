@@ -1,10 +1,12 @@
 import {Route, Routes} from 'react-router'
 import HomePage from "./pages/HomePage"
-import LoginPage from "./pages/LoginPage"
+import LoginPage from "./pages/LoginPage.jsx"
 import RegisterPage from "./pages/RegisterPage"
 import CheckoutPage from "./pages/CheckoutPage"
 import ItemPage from "./pages/ItemPage"
-import NewPasswordPage from "./pages/NewPasswordPage"
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"
+import ResetPasswordPage from "./pages/ResetPasswordPage"
+import ProfilePage from "./pages/ProfilePage"
 
 
 const App = () => {
@@ -16,8 +18,9 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/checkout" element={<CheckoutPage />}></Route>
         <Route path="/item/:id" element={<ItemPage />}></Route>
-        <Route path="/forgotpassword" element={<NewPasswordPage />}></Route>
-
+        <Route path="/forgot" element={<ForgotPasswordPage />}></Route>
+        <Route path="/reset-password" element={<ResetPasswordPage />}></Route>
+        <Route path="/profile" element={<ProfilePage />}></Route>
       </Routes>
       
     </div>

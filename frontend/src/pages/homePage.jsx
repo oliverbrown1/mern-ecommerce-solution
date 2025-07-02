@@ -1,5 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import ItemCard from '../components/ItemCard'
+import CategoryTabs from '../components/CategoryTabs'
 
 const homePage = () => {
   return (
@@ -42,7 +44,7 @@ const homePage = () => {
             </div>
             <div
               tabIndex={0}
-              className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+              className="card card-compact dropdown-content bg-base-100 z-50 mt-3 w-52 shadow">
               <div className="card-body">
                 <span className="text-lg font-bold">8 Items</span>
                 <span className="text-info">Subtotal: $999</span>
@@ -52,7 +54,7 @@ const homePage = () => {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end z-50">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -64,57 +66,27 @@ const homePage = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <li>
-                <a className="justify-between">
+                <a className="justify-between" href="/profile">
                   Profile
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li><a href="/login">Logout</a></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div className="flex-1 flex flex-col w-full">
-        <div className="tabs tabs-boxed w-full bg-base-200">
-          <a className="tab tab-lg flex-1">Category 1</a>
-          <a className="tab tab-lg flex-1 tab-active">Category 2</a>
-          <a className="tab tab-lg flex-1">Category 3</a>
-        </div>
+        <CategoryTabs/>
         <div className="flex-1 p-6 bg-base-100">
           <div className="h-full w-full overflow-y-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-              
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
               {/* <div className="card w-96 shadow-xl border border-white"> */}
-              <motion.div
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.2 },
-                }}
-                className="card w-96 shadow-xl border border-white p-3"
-              >
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes" />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Shoes<div className="text-sm card-title flex items-center gap-0.5">4.4 
-                    <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  </div></h2>
-                  <p className="mb-2">Green and white Nike shoes </p>
-                  <div className="card-actions justify-between">
-                      <div className="text-xl font-bold">£199.99</div>
-                      <button className="btn btn-primary btn-md">Add To Basket</button>
-                  </div>
-                </div>
-              </motion.div>
-              <div>test2</div>
-              <div>test3</div>
-              <div> test4</div>
+              <ItemCard/>
+              <ItemCard/>
+              <ItemCard/>
+              <ItemCard/>
             </div>
           </div>
         </div>
