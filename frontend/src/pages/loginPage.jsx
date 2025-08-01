@@ -1,6 +1,6 @@
 import React from 'react'
-import PasswordBar from '../components/PasswordBar'
-import UsernameBar from '../components/UsernameBar'
+import PasswordBar from '../components/input/PasswordBar'
+import UsernameBar from '../components/input/UsernameBar'
 
 const LoginPage = () => {
   return (

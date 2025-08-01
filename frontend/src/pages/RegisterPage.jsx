@@ -1,7 +1,7 @@
 import React from 'react'
-import EmailBar from '../components/EmailBar'
-import UsernameBar from '../components/UsernameBar'
-import PasswordBar from '../components/PasswordBar'
+import EmailBar from '../components/input/EmailBar'
+import UsernameBar from '../components/input/UsernameBar'
+import PasswordBar from '../components/input/PasswordBar'
 
 const RegisterPage = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import PasswordBar from '../components/PasswordBar'
+import PasswordBar from '../components/input/PasswordBar'
 
 const ResetPasswordPage = () => {
   return (
