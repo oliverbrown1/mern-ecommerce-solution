@@ -2,8 +2,37 @@ import React from 'react'
 import EmailBar from '../components/input/EmailBar'
 import UsernameBar from '../components/input/UsernameBar'
 import PasswordBar from '../components/input/PasswordBar'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
+const navigate = useNavigate();
 const RegisterPage = () => {
+
+  const register = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try{
+      const response = await axios.post("http://localhost:3001/auth/signup", {
+        user: formData.get("username"),
+        pwd: formData.get("password")
+      });
+      console.log(response.data);
+      // store token
+      // response.data.token
+      if(response.data.status === 500){
+        alert("Unable to sign up.");
+      }
+      else if(response.data.status === 400){
+        alert("User already exists.");
+      }
+      else{
+        navigate("/login");
+      }
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
   return (
     <div className='min-h-screen flex items-center justify-center p-4'>
       <div className='border p-8 rounded-lg shadow-md w-full max-w-md'>

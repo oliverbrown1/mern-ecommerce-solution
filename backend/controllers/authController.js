@@ -4,7 +4,8 @@ const User = require("../models/userModel.js")
 
 // intermediate middleware function
 const verifyToken = async (req, res, next) => {
-    let token = req.headers["authtoken"]
+    let token = req.headers["authtoken"] || req.headers["authorization"]
+    
     if(!token){
         return res.status(402).json({message : "Missing token"})
     }
@@ -77,18 +78,18 @@ const loginUser = async (req, res) => {
 
 }
 
+// todo
+// const forgotPassword = async (req, res) => {
+// }
+
+// todo
+// const resetPassword = async (req, res) => {
+// }
+
 const logout = async (req, res) => {
     res.clearCookie('token');
     res.status(200).json({message: "You have successfully logged out"});
 }
 
-// const logoutUser = async (req, res) => {
-//     try{
-
-//     }
-//     catch(error){
-//         return res.status(500).json({message: `Server error has occurred: ${error}`})
-//     }
-// }
 
 module.exports = { verifyToken, signupUser, loginUser }

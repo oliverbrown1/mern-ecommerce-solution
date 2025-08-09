@@ -27,6 +27,7 @@ const UsernameBar = ({prompt}) => {
             maxLength="30"
             title="Only letters, numbers or dash"
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            name="username"
             />
         </div>
     </div>

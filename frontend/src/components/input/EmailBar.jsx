@@ -21,6 +21,7 @@ const EmailBar = ({placeholder}) => {
             <input
             type="email"
             placeholder={placeholder}
+            name = "email"
             required
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />

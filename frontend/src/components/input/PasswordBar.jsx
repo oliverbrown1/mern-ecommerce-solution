@@ -25,6 +25,7 @@ const PasswordBar = ({label, svg, placeholder}) => {
             minLength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            name="password"
             />
         </div>
     </div>
