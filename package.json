@@ -1,5 +1,5 @@
 {
-    "name": "debate-ai",
+    "name": "mern-marketplace",
     "version": "1.0.0",
     "private": true,
     "workspaces": [
@@ -9,8 +9,8 @@
     "scripts": {
       "start": "concurrently \"npm run frontend\" \"npm run backend\"",
       "frontend": "cd frontend && npm run dev",
-      "backend": "cd backend && node app.js",
-      "inst": "npm install && cd frontend && npm install && cd ../backend && npm install"
+      "backend": "cd backend && npm run dev",
+      "inst": "npm install && cd frontend && npm run build && cd ../backend && npm install"
     },
     "devDependencies": {
       "concurrently": "^8.0.0"

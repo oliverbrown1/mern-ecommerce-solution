@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EmailBar = ({placeholder}) => {
+const EmailBar = ({placeholder, email, update}) => {
   return (
     <div>
         <label className="block text-sm font-medium mb-1">Email</label>
@@ -24,6 +24,8 @@ const EmailBar = ({placeholder}) => {
             name = "email"
             required
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={email}
+            onChange={update}
             />
         </div>
     </div>

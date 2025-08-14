@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UsernameBar = ({prompt}) => {
+const UsernameBar = ({prompt, update, user}) => {
   return (
     <div>
         <label className="block text-sm font-medium mb-1">Username</label>
@@ -27,7 +27,8 @@ const UsernameBar = ({prompt}) => {
             maxLength="30"
             title="Only letters, numbers or dash"
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            name="username"
+            value={user}
+            onChange={update}
             />
         </div>
     </div>

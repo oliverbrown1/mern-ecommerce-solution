@@ -5,32 +5,34 @@ const limiter = require("./middleware/ratelimiter.js")
 const { verifyToken } = require('./controllers/authController')
 const app = express()
 const port = 3001
+const cors = require('cors')
 
 
 
 // middleware routes
 app.use(express.json());
-app.use(limiter)
+app.use(cors())
+// app.use(limiter)
 app.use("/auth",loginRoutes);
 
 // initiate DB connection
 connectDB();
 
-// start message
-app.listen(port, () => {
-    console.log(`server started on ${port}`);
-})
-
 // protected route
 app.get("/", verifyToken, (req,res) => {
     // token verification successful - can access protected routes
     res.status(200).send("You are now logged in");
-})
-// routes
-app.get("/help", (req,res) => {
+});
+
+app.get("/help", (req, res) => {
     res.status(200).send("Hi");
 })
 
-app.get('*', (req, res) => {
-    res.redirect('/');
+// app.get('/{*any}', (req, res) => {
+//     res.redirect('/');
+// });
+
+// start server
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
 });

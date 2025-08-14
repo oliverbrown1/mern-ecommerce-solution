@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PasswordBar = ({label, svg, placeholder}) => {
+const PasswordBar = ({label, svg, placeholder, update, pwd}) => {
   return (
     <div>
         <label className="block text-sm font-medium mb-1">{label}</label>
@@ -22,10 +22,10 @@ const PasswordBar = ({label, svg, placeholder}) => {
             type="password"
             required
             placeholder={placeholder}
-            minLength="8"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            minLength="3"
             className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            name="password"
+            onChange={update}
+            value={pwd}
             />
         </div>
     </div>
