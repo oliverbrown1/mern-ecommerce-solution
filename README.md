@@ -25,7 +25,7 @@ This won't end up some e-commerce clone, but is to begin with.
 1. Create an .env file in the backend directory as shown below
 2. Ensure your terminal is in the outer directory, run ```npm run inst && npm run start```
 
-**`main.py`**
+**`.env`**
 ```python
 MGURL = # You would have to setup your own project using the MongoDB cloud service and you will be prompted with a URL to add to this file
 SECRET_KEY = # Secret key used for JWT encryption, should never be shared.
