@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import PasswordBar from '../components/input/PasswordBar'
 import EmailBar from '../components/input/EmailBar'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { AuthContext } from '../context/AuthContext'
+
 
 const LoginPage = () => {
+
+  const {user, setUser} = useContext(AuthContext);
+//   useEffect(() => {
+//     console.log("User updated:", user);
+// }, [user]);
 
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
@@ -32,6 +39,9 @@ const LoginPage = () => {
       navigate("/");
       // store token
       // response.data.token
+      console.log(response.data.token)
+      setUser(response.data.token);
+      console.log(user)
 
     }
     catch(error){

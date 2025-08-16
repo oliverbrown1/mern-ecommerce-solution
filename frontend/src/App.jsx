@@ -7,24 +7,49 @@ import ItemPage from "./pages/ItemPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
 import ProfilePage from "./pages/ProfilePage"
+import { AuthContextProvider} from "./context/AuthContext"
+import ProtectedRoutes from "./utils/ProtectedRoutes"
+import PublicRoutes from "./utils/PublicRoutes"
+import { useContext } from "react"
+import { AuthContext } from "./context/AuthContext"
 
+// Remove these imports from the top
+// import { useContext } from "react"
+// import { AuthContext } from "./context/AuthContext"
 
 const App = () => {
   return (
+    <AuthContextProvider>
+      <AppContent />
+    </AuthContextProvider>
+  );
+};
+
+// Create a new component that uses the context
+const AppContent = () => {
+  const { user } = useContext(AuthContext);
+  console.log("App rendering, current user:", user);
+  
+  return (
     <div data-theme="synthwave" className='min-h-screen w-screen'>
       <Routes>
-        <Route path="/" element={<HomePage/>}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/checkout" element={<CheckoutPage />}></Route>
-        <Route path="/item" element={<ItemPage />}></Route>
-        <Route path="/forgot" element={<ForgotPasswordPage />}></Route>
-        <Route path="/reset-password/:id/:token" element={<ResetPasswordPage />}></Route>
-        <Route path="/profile" element={<ProfilePage />}></Route>
-      </Routes>
-      
-    </div>
-  )
-}
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/item" element={<ItemPage />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPasswordPage />} />
 
-export default App
+        <Route element={<PublicRoutes />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot" element={<ForgotPasswordPage />} />
+        </Route>
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+        </Route>
+      </Routes>
+    </div>
+  );
+};
+
+export default App;
