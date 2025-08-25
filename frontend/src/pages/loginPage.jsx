@@ -41,6 +41,8 @@ const LoginPage = () => {
       // response.data.token
       console.log(response.data.token)
       setUser(response.data.token);
+      localStorage.setItem("authtoken", response.data.token);
+      console.log("auth-token stored: ",localStorage.getItem("authtoken"))
       console.log(user)
 
     }

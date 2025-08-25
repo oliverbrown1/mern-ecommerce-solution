@@ -217,5 +217,19 @@ const logout = async (req, res) => {
     res.status(200).json({message: "You have successfully logged out"});
 }
 
+const getUser = async (req, res) => {
+    try{
+        const user = await User.findById(req.user);
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+        res.status(200).json({ message: "User found successfully.", user: user });
+    }
+    catch(error){
+        console.log(error)
+        return res.status(500).json({ message: "An error occurred while getting your user."});
+    }
+}
 
-module.exports = { verifyToken, signupUser, loginUser, forgotPassword, resetPassword}
+
+module.exports = { verifyToken, signupUser, loginUser, forgotPassword, resetPassword, getUser}

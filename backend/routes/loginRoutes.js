@@ -19,4 +19,6 @@ router.post("/forgot", ac.forgotPassword)
 
 router.post("/reset-password", ac.resetPassword)
 
+router.post("/verify-token", ac.verifyToken, ac.getUser);
+
 module.exports = router;

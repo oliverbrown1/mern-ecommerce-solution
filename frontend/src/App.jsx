@@ -27,8 +27,14 @@ const App = () => {
 
 // Create a new component that uses the context
 const AppContent = () => {
-  const { user } = useContext(AuthContext);
-  console.log("App rendering, current user:", user);
+  const user = useContext(AuthContext);
+  // console.log("App rendering, current user:", user);
+
+  if (user.isLoading) {
+    return <div data-theme="synthwave" className="flex items-center justify-center h-screen w-screen">
+      <span className="loading loading-spinner loading-xl"></span>
+    </div>;
+  }
   
   return (
     <div data-theme="synthwave" className='min-h-screen w-screen'>

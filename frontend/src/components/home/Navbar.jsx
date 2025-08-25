@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 
 const Navbar = () => {
-  const {user, setUser} = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   return (
     <div className="navbar shadow-sm">
         <div className="flex-1">
@@ -55,7 +55,7 @@ const Navbar = () => {
                 </a>
             </li>
             <li><a href="/wishlist">Wishlist</a></li>
-            <li><a href="/login" onClick={() => setUser(null)}>Logout</a></li>
+            <li><a href="/login" onClick={auth.logout}>Logout</a></li>
             </ul>
         </div>
         </div>
