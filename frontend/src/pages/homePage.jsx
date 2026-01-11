@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import ItemCard from '../components/home/ItemCard'
 import CategoryTabs from '../components/home/CategoryTabs'
 import Navbar from '../components/home/Navbar'
