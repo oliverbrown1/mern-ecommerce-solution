@@ -1,4 +1,5 @@
 const loginRoutes = require("./routes/loginRoutes.js")
+const itemRoutes = require("./routes/itemRoutes.js")
 const express = require('express')
 const connectDB = require("./config/database.js")
 const limiter = require("./middleware/ratelimiter.js")
@@ -9,11 +10,12 @@ const cors = require('cors')
 
 
 
-// middleware routes
+// middleware routess
 app.use(express.json());
 app.use(cors())
 // app.use(limiter)
 app.use("/auth",loginRoutes);
+app.use("/items", itemRoutes);
 
 // initiate DB connection
 connectDB();

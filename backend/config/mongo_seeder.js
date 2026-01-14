@@ -18,6 +18,17 @@ async function seedFromAPI() {
   process.exit(0);
 }
 
+async function test() {
+  await connectDB();
+  await Item.updateMany(
+  { owner: { $exists: false } },
+  { $set: { owner: "Admin" } }
+  );
+  process.exit(0);
+}
+
+// test();
+
 // seedFromAPI().catch((err) => {
 //   console.error(err);
 //   process.exit(1);

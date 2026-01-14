@@ -1,0 +1,11 @@
+// TODO - define routes to allow site to get items and their data from mongodb
+const ic = require("../controllers/itemController.js");
+const express = require('express');
+const router = express.Router();
+
+router.get("/home-screen-items", ic.homeScreenItems);
+router.get("/item/:sku", ic.getItem);
+router.post("/item", ic.addItem);
+router.delete("/item/:sku", ic.removeItem);
+
+module.exports = router;

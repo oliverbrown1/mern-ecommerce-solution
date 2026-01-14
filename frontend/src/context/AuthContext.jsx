@@ -45,8 +45,10 @@ export const AuthContextProvider = ({children}) => {
             }
             catch(error){
                 console.log(error);
-                alert(error.response.data.message);
-                setToken(null)
+                const msg = error?.response?.data?.message || "Session expired. Please log in again.";
+                setToken(null);
+                setUser(null);
+                setIsLoading(false);
             }
         }
 
