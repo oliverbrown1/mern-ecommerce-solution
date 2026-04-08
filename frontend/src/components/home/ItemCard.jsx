@@ -1,20 +1,25 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const ItemCard = ({item}) => {
+  const navigate = useNavigate();
+
   return (
-    <motion.div
+    <motion.button
+        type="button"
         whileHover={{
-        scale: 1.05,
-        transition: { duration: 0.2 },
+            scale: 1.05,
+            transition: { duration: 0.2 },
         }}
-        className="card w-full shadow-xl border border-white p-3"
-        onClick={() => {redirect}}
+        className="card w-full shadow-xl border border-white p-3 text-left"
+        onClick={() => navigate(`/item/${item.id}`)}
     >
-        <figure>
+        <figure className="rounded-lg p-3 bg-white/10 ring-1 ring-white/10">
         <img
             src={item.image_url}
-            alt="Shoes" />
+            alt="Shoes"
+            className="w-full h-48 object-contain" />
         </figure>
         <div className="card-body">
         <h2 className="card-title">{item.name}<div className="text-sm card-title flex items-center gap-0.5">{item.rating} 
@@ -25,10 +30,10 @@ const ItemCard = ({item}) => {
         {/* <p className="mb-2">Green and white Nike shoes </p> */}
         <div className="card-actions justify-between">
             <div className="text-xl font-bold">£{item.price}</div>
-            <button className="btn btn-primary btn-md">Add To Basket</button>
+            <span className="btn btn-primary btn-md pointer-events-none">Add To Basket</span>
         </div>
         </div>
-    </motion.div>
+    </motion.button>
   )
 }
 
