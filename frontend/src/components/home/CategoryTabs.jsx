@@ -1,11 +1,22 @@
 import React from 'react'
 
-const CategoryTabs = ({Cats}) => {
+const CategoryTabs = ({categories, selectedCategory, setSelectedCategory}) => {
   return (
-    <div className="tabs tabs-boxed w-full bg-base-200 z-0">
-        <a className="tab tab-lg flex-1">Category 1</a>
-        <a className="tab tab-lg flex-1 tab-active">Category 2</a>
-        <a className="tab tab-lg flex-1">Category 3</a>
+    <div className="tabs tabs-boxed w-full rounded-none border-b border-white/10 bg-base-200 px-4 py-3">
+          {categories.map((category) => (
+          <button 
+            key={category} 
+            type="button"
+            className={`tab tab-lg flex-1 rounded-xl border-0 bg-transparent text-md font-bold capitalize transition-all duration-200 ${
+              selectedCategory === category
+                ? 'tab-active bg-base-100 text-secondary shadow-md'
+                : 'text-base-content/70 hover:bg-base-100/70 hover:text-base-content'
+            }`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+          ))}
     </div>
   )
 }

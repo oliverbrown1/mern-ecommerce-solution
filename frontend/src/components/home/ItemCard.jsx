@@ -12,7 +12,7 @@ const ItemCard = ({item}) => {
             scale: 1.05,
             transition: { duration: 0.2 },
         }}
-        className="card w-full shadow-xl border border-white p-3 text-left"
+        className="card w-full shadow-xl border border-white p-3 text-left bg-inherit"
         onClick={() => navigate(`/item/${item.id}`)}
     >
         <figure className="rounded-lg p-3 bg-white/10 ring-1 ring-white/10">

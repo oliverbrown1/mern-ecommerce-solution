@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className="navbar shadow-sm">
         <div className="flex-1">
-        <a className="btn btn-ghost text-xl">MERN Marketplace</a>
+        <a className="btn btn-ghost text-xl" href="/">MERN Marketplace</a>
         </div>
         <div>
         <div className="relative inset-y-0 start-0 flex items-center ps-3 input input-bordered w-full">

@@ -40,7 +40,7 @@ const AppContent = () => {
     <div data-theme="synthwave" className='min-h-screen w-screen'>
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        <Route path="/item" element={<ItemPage />} />
+        <Route path="/item/:id" element={<ItemPage />} />
         <Route path="/reset-password/:id/:token" element={<ResetPasswordPage />} />
 
         <Route element={<PublicRoutes />}>
