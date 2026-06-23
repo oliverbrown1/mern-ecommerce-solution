@@ -1,4 +1,10 @@
 .env
+
+# generate modules
 node_modules
 /node_modules
 backend/node_modules
+.DS_Store
+
+# playwright
+.playwright-cli

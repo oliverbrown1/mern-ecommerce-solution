@@ -146,11 +146,16 @@ const ItemPage = () => {
           <h2 className="text-xl font-bold">Similar Items</h2>
           <p className="text-sm text-base-content/60">More from the same catalogue lane</p>
         </div>
-        <div className='flex items-stretch gap-4 overflow-x-auto py-2'>
-        {similarItems.map((similarItem) => (
+        <div className="carousel rounded-box w-screen py-2 gap-5">
+          {similarItems.map((similarItem) => (
           <ItemPreview item={similarItem} key={similarItem.id}/>
         ))}
         </div>
+        {/* <div className='flex items-stretch gap-4 overflow-x-auto py-2'>
+        {similarItems.map((similarItem) => (
+          <ItemPreview item={similarItem} key={similarItem.id}/>
+        ))}
+        </div> */}
       </section>
 
       {/* reviews */}

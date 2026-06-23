@@ -1,16 +1,20 @@
 {
-    "name": "mern-marketplace",
+    "name": "mern-agentic-marketplace",
     "version": "1.0.0",
     "private": true,
     "workspaces": [
         "frontend",
         "backend"
     ],
+    "engines": {
+        "node" : ">=22.12.0"
+    },
     "scripts": {
         "start": "concurrently \"npm run frontend\" \"npm run backend\"",
         "frontend": "cd frontend && npm run dev",
         "backend": "cd backend && npm run dev",
-        "inst": "npm install && cd frontend && npm run build && cd ../backend && npm install"
+        "inst": "npm install && cd frontend && npm run build && cd ../backend && npm install",
+        "update": "npm update --workspaces"
     },
     "devDependencies": {
         "concurrently": "^8.0.0"
