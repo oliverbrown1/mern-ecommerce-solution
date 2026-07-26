@@ -8,7 +8,7 @@ import axios from 'axios'
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [homePageItems, setHomePageItems] = useState([]);
 
   const getCategories = async () => {
@@ -39,10 +39,10 @@ const HomePage = () => {
   }, []);
 
 
-  const fetchItems = async () => {
+  const fetchItems = async (category) => {
     setIsLoading(true);
     try{
-      const response = await axios.get(`http://localhost:3001/items/home-screen-items/${selectedCategory}`, {
+      const response = await axios.get(`http://localhost:3001/items/home-screen-items/${category}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -61,7 +61,9 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetchItems();
+    if (!selectedCategory) return;
+    
+    fetchItems(selectedCategory);
   }, [selectedCategory]);
 
   return (

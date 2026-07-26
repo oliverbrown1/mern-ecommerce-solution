@@ -148,7 +148,7 @@ const ItemPage = () => {
         </div>
         <div className="carousel rounded-box w-screen py-2 gap-5">
           {similarItems.map((similarItem) => (
-          <ItemPreview item={similarItem} key={similarItem.id}/>
+          <ItemPreview item={similarItem} key={similarItem.id || similarItem._id}/>
         ))}
         </div>
         {/* <div className='flex items-stretch gap-4 overflow-x-auto py-2'>
