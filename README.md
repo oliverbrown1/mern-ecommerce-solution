@@ -22,6 +22,12 @@ A MERN full-stack ecommerce solution. MERN stands for Mongo.db, Express.js, Reac
 
 ## Installation
 
+### Initial Setup
+
+1. Create a MongoDB account and set up a project. When prompted, save the given URL to `MGURL` env variable.
+2. Execute `backend/config/mongo_seeder.js` to populate the DB
+3. Create an Upstash account and save `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` env variables for rate limiting.
+
 ### Frontend
 
 1. Ensure you have the latest version of npm installed.
