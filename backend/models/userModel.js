@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const cartSchema = require("./cartModel.js")
+const { cartSchema } = require("./cartModel.js")
 
 const userSchema = new mongoose.Schema({
     email : {
@@ -27,6 +27,33 @@ const userSchema = new mongoose.Schema({
     cart : {
         type: cartSchema,
         default: () => ({ items: [] }),
+    },
+    balance : {
+        type: Number,
+        default: 0,
+        min: 0
+    },
+    billing_address: {
+        line1: String,
+        line2: String,
+        city: String,
+        postcode: String,
+        country: String,
+        isDefault: {
+            type: Boolean,
+            default: false
+        }
+    },
+    shipping_address: {
+        line1: String,
+        line2: String,
+        city: String,
+        postcode: String,
+        country: String,
+        isDefault: {
+            type: Boolean,
+            default: false
+        }
     }
 }, {timestamps: true}
 )
