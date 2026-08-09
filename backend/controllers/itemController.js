@@ -1,11 +1,15 @@
 require('dotenv').config()
 const Item = require("../models/itemModel.js")
+const User = require("../models/userModel.js")
 
 const homeScreenItems = async (req, res) => {
     // TODO - gets X items for home screen display
     try{
         const { category } = req.params;
         const items = await Item.find({ category: category }).limit(20);
+        if(items.length == 0){
+            return res.status(400).json({message : "No items found in that category"})
+        }
         const processedItems = items.map((item) => ({
             id: item._id,
             name: item.title,
@@ -56,7 +60,12 @@ const addItem = async (req, res) => {
     // TODO - adds a new item, requires auth
     try{
         const {title, price, description, thumbnail, images, category, stock, rating, brand, sku, tags, reviews} = req.body;
-        const owner = req.user || "Admin";
+        const owner = req.user;
+        
+        const user = await User.findById(owner);
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
 
         const item = await Item.findOne({ sku });
         if(item){
@@ -90,10 +99,21 @@ const addItem = async (req, res) => {
 const removeItem = async (req, res) => {
     // TODO - removes an item, requires auth
     try{
+        const owner = req.user
         const { id } = req.params;
+        const user = await User.findById(owner);
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
         const item = await Item.findById(id);
         if(!item){
             return res.status(404).json({ message: "Item not found." });
+        }
+
+        // check ownership
+        if (owner !== item.owner){
+            return res.status(403).json({message : "User is not the owner of this item"})
         }
         await Item.findByIdAndDelete(id);
         return res.status(200).json({ message: "Item deleted successfully." });

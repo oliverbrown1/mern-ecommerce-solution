@@ -33,11 +33,11 @@ const getCart = async (req, res) => {
 
 const addToCart = async (req, res) => {
     const userId = req.user
-    const { itemId, quantity } = req.params;
+    const { itemId, quantity } = req.body;
     // arguments are string, need to be converted
     const quantityNum = Number(quantity)
     try {
-        if (!Number.isInteger(quantityNum) || quantityNum < 0) {
+        if (!Number.isInteger(quantityNum) || quantityNum <= 0) {
             return res.status(400).json({
                 message: "Quantity must be a non-negative integer.",
             });
@@ -66,7 +66,8 @@ const addToCart = async (req, res) => {
 // modify cart item
 const modifyCart = async (req, res) => {
     const userId = req.user
-    const { itemId, quantity } = req.params;
+    const { itemId } = req.params
+    const { quantity } = req.body;
     // arguments are string, need to be converted
     const quantityNum = Number(quantity)
     try {
@@ -108,7 +109,7 @@ const emptyCart = async (req, res) => {
         user.cart.items.splice(0, user.cart.items.length);
         await user.save()
 
-        return res.status(200).json({ message: `cart emptied`})
+        return res.status(200).json({ message: `Cart emptied.`})
 
     } catch (error) {
         return res.status(500).json({ message: `Server error has occurred: ${error}` });
@@ -117,7 +118,7 @@ const emptyCart = async (req, res) => {
 
 const checkoutCart = async (req, res) => {
     const userId = req.user;
-    const { useBalance } = req.params;
+    const { useBalance } = req.body;
     try {
         const user = await User.findById(userId);
         if (!user) {
