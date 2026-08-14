@@ -1,5 +1,5 @@
 import React from 'react'
-import ItemPreview from '../components/home/ItemPreview'
+import ItemCard from '../components/home/ItemCard'
 import Navbar from "../components/home/Navbar"
 
 const ItemPage = () => {
@@ -72,10 +72,7 @@ const ItemPage = () => {
 
       {/* more items */}
       <div className='flex flex-row items-center justify-center overflow-x-scroll gap-3'>
-        <ItemPreview/>
-        <ItemPreview/>
-        <ItemPreview/>
-        <ItemPreview/>
+        <ItemCard/>
       </div>
       </div>
     </div>

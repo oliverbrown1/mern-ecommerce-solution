@@ -16,7 +16,7 @@ const RegisterPage = () => {
     e.preventDefault();
     setIsLoading(true);
     try{
-      const response = await axios.post("http://localhost:3001/auth/signup", {
+      const response = await axios.post("/auth/signup", {
         email : email,
         user: user,
         pwd: pwd

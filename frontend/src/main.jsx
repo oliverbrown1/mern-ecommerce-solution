@@ -4,6 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from "react-router"
 
+import axios from "axios"
+axios.defaults.baseURL = "http://localhost:3001"
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

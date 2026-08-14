@@ -1,9 +1,14 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { CartContext } from '../../context/CartContext'
+import axios from "axios";
 
 const Navbar = () => {
   const auth = useContext(AuthContext);
+  const {cart, cartTotal} = useContext(CartContext);
+  const [isLoading, setIsLoading] = useState(false);
+  
   return (
     <div className="navbar shadow-sm">
         <div className="flex-1">
@@ -28,13 +33,19 @@ const Navbar = () => {
             <div
             tabIndex={0}
             className="card card-compact dropdown-content bg-base-100 z-50 mt-3 w-52 shadow">
+            {isLoading ? (
+              <div className="flex justify-center items-center h-full">
+                <span className="loading loading-spinner loading-lg"></span>
+              </div>
+            ) : (
             <div className="card-body">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
+                <span className="text-lg font-bold">{cart.items.length} Items</span>
+                <span className="text-info">Subtotal: £{cartTotal}</span>
                 <div className="card-actions">
                 <a href="/checkout" className="btn btn-primary btn-block">View cart</a>
                 </div>
             </div>
+            )}
             </div>
         </div>
         <div className="dropdown dropdown-end z-50">

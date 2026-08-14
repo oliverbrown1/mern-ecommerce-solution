@@ -1,11 +1,24 @@
-import React from 'react'
+import React, {useState, useContext} from 'react'
+import { CartContext } from '../../context/CartContext'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 const ItemCard = ({item}) => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const cart = useContext(CartContext)
+    const [isBasketButtonLoading, setIsBasketButtonLoading] = useState(false);
 
-  return (
+    const addToBasketButton = async (event) => {
+        event.preventDefault();
+        setIsBasketButtonLoading(true);
+        try {
+        await cart.addToCart(item.id, );
+        } finally {
+        setIsBasketButtonLoading(false);
+        }
+    }
+
+    return (
     <motion.button
         type="button"
         whileHover={{
@@ -30,11 +43,13 @@ const ItemCard = ({item}) => {
         {/* <p className="mb-2">Green and white Nike shoes </p> */}
         <div className="card-actions justify-between">
             <div className="text-xl font-bold">£{item.price}</div>
-            <span className="btn btn-primary btn-md pointer-events-none">Add To Basket</span>
+            <form onSubmit={addToBasketButton}>
+                <button disabled={isBasketButtonLoading} className="btn btn-primary btn-md pointer-events-none">Add To Basket</button>
+            </form>
         </div>
         </div>
     </motion.button>
-  )
+    )
 }
 
 export default ItemCard

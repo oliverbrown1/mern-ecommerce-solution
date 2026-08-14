@@ -14,7 +14,7 @@ const HomePage = () => {
   const getCategories = async () => {
     setIsLoading(true);
     try{
-      const response = await axios.get("http://localhost:3001/items/categories", {
+      const response = await axios.get("/items/categories", {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import ItemPreview from '../components/home/ItemPreview'
+// TODO: add wishlist context addToWishlist
+import React, { useEffect, useState, useContext } from 'react'
+import { CartContext } from '../context/CartContext'
+import ItemCard from '../components/home/ItemCard'
 import Navbar from "../components/home/Navbar"
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -7,15 +9,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 const ItemPage = () => {
   const { id } = useParams();
+  const cart = useContext(CartContext);
   const [item, setItem] = useState(null);
   const [similarItems, setSimilarItems] = useState([]);
   const [currentThumbnail, setCurrentThumbnail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const fetchItem = async () => {
     setIsLoading(true);
     try{
-      const response = await axios.get(`http://localhost:3001/items/item/${id}`, {
+      const response = await axios.get(`/items/item/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -41,6 +46,28 @@ const ItemPage = () => {
   const imageOnClick = (img) => {
     setCurrentThumbnail(img);
   }
+
+  const addToBasketButton = async (event) => {
+    event.preventDefault();
+    setIsButtonLoading(true);
+    try {
+      await cart.addToCart(id, quantity);
+    } finally {
+      setIsButtonLoading(false);
+    }
+  };
+
+  const addToWishlistButton = async (event) => {
+    event.preventDefault();
+    setIsButtonLoading(true);
+    // TODO: add wishlist context function
+    try {
+  
+    }
+    finally{
+      setIsButtonLoading(false);
+    }
+  };
 
   return (
     <div className='min-h-4/5 py-5 px-4 sm:px-6 lg:px-8'>
@@ -133,8 +160,17 @@ const ItemPage = () => {
 
           {/* add to basket */}
           <div className='flex flex-col sm:flex-row gap-4 w-full pt-2'>
-            <button className='btn btn-primary btn-md flex-1'>Add To Basket</button>
-            <button className='btn btn-outline btn-md flex-1'>Add To Wishlist</button>
+            <form className="flex flex-1 gap-3" onSubmit={addToBasketButton}>
+              <div className="join">
+                <button type="button" className="btn join-item" aria-label="Decrease quantity" disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>−</button>
+                <span className="btn join-item pointer-events-none">{quantity}</span>
+                <button type="button" className="btn join-item" aria-label="Increase quantity" onClick={() => setQuantity(quantity + 1)}>+</button>
+              </div>
+              <button type="submit" disabled={isButtonLoading} className='btn btn-primary btn-md flex-1'>Add To Basket</button>
+            </form>
+            <form onSubmit={addToWishlistButton}>
+              <button disabled={isButtonLoading} className='btn btn-outline btn-md flex-1'>Add To Wishlist</button>
+            </form>
           </div>
           
         </div>
@@ -147,15 +183,12 @@ const ItemPage = () => {
           <p className="text-sm text-base-content/60">More from the same catalogue lane</p>
         </div>
         <div className="carousel rounded-box w-screen py-2 gap-5">
-          {similarItems.map((similarItem) => (
-          <ItemPreview item={similarItem} key={similarItem.id || similarItem._id}/>
-        ))}
+          <div className="carousel-item">
+            {similarItems.map((similarItem) => (
+            <ItemCard item={similarItem} key={similarItem.id || similarItem._id}/>
+            ))}
+          </div>
         </div>
-        {/* <div className='flex items-stretch gap-4 overflow-x-auto py-2'>
-        {similarItems.map((similarItem) => (
-          <ItemPreview item={similarItem} key={similarItem.id}/>
-        ))}
-        </div> */}
       </section>
 
       {/* reviews */}

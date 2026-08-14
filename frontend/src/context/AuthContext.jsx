@@ -28,7 +28,7 @@ export const AuthContextProvider = ({children}) => {
             }
             
             try {
-                const response = await axios.post('http://localhost:3001/auth/verify-token', 
+                const response = await axios.post('/auth/verify-token', 
                     {},
                     {
                         headers: {

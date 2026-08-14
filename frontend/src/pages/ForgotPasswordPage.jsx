@@ -17,7 +17,7 @@ const ForgotPasswordPage = () => {
         setDisableButton(true);
         setIsLoading(true);
         try{
-            const response = await axios.post("http://localhost:3001/auth/forgot", {
+            const response = await axios.post("/auth/forgot", {
                 email: email,
                 user: user,
                 useUser: useUsername
