@@ -1,4 +1,3 @@
-// TODO - define routes to allow site to get items and their data from mongodb
 const ic = require("../controllers/itemController.js");
 const ac = require("../controllers/authController.js")
 const express = require('express');

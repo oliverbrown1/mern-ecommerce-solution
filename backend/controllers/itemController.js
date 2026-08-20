@@ -3,7 +3,6 @@ const Item = require("../models/itemModel.js")
 const User = require("../models/userModel.js")
 
 const homeScreenItems = async (req, res) => {
-    // TODO - gets X items for home screen display
     try{
         const { category } = req.params;
         const items = await Item.find({ category: category }).limit(20);
@@ -38,7 +37,6 @@ const getCategories = async (req, res) => {
 }
 
 const getItem = async (req, res) => {
-    // TODO - gets singular item details
     try{
         const { id } = req.params;
         const item = await Item.findById(id);
@@ -57,11 +55,11 @@ const getItem = async (req, res) => {
 
 
 const addItem = async (req, res) => {
-    // TODO - adds a new item, requires auth
     try{
         const {title, price, description, thumbnail, images, category, stock, rating, brand, sku, tags, reviews} = req.body;
         const owner = req.user;
         
+        // auth
         const user = await User.findById(owner);
         if (!user) {
             return res.status(404).json({ message: "User not found." });
@@ -97,11 +95,11 @@ const addItem = async (req, res) => {
 }
 
 const removeItem = async (req, res) => {
-    // TODO - removes an item, requires auth
     try{
         const owner = req.user
         const { id } = req.params;
         const user = await User.findById(owner);
+        // auth
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }

@@ -88,7 +88,6 @@ const loginUser = async (req, res) => {
 
 }
 
-// todo
 const forgotPassword = async (req, res) => {
     const { email, user, useUser } = req.body;
     let foundUser;
@@ -184,7 +183,6 @@ const forgotPassword = async (req, res) => {
     });
 }
 
-// todo
 const resetPassword = async (req, res) => {
     const {id, token, pwd} = req.body;
     const user = await User.findById(id);

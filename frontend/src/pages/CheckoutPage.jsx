@@ -4,7 +4,6 @@ import { CartContext } from '../context/CartContext'
 
 const CheckoutPage = () => {
     const cart = useContext(CartContext);
-    // TODO: integrate cart context data
     return (
         <div className="grid grid-cols-3">
             <div className="h-screen col-span-2">   

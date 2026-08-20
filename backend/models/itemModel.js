@@ -12,7 +12,6 @@ const itemSchema = new mongoose.Schema({
   brand: String,
   sku: String,
   owner: { type: String, default: "admin", required: true },
-  //   todo - tags should be a variable list of strings
   tags: [],
   reviews: [
     {
