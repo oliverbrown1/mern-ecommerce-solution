@@ -4,14 +4,15 @@ const ac = require("../controllers/authController.js")
 const uc = require("../controllers/userController.js")
 
 // preceded by /cart
-router.get("/get", ac.verifyToken, uc.getCart);
+router.get("/addresses", ac.verifyToken, uc.getAddresses);
 
-router.post("/add", ac.verifyToken, uc.addToCart);
+router.patch("/address/shipping", ac.verifyToken, uc.setShippingAddress);
 
-router.patch("/modify/:itemId", ac.verifyToken, uc.modifyCart);
+router.patch("/address/billing", ac.verifyToken, uc.setBillingAddress)
 
-router.delete("/empty", ac.verifyToken, uc.emptyCart);
+router.get("/balance", ac.verifyToken, uc.getBalance)
 
-router.post("/checkout", ac.verifyToken, uc.checkoutCart);
+// top-up balance, not modify
+router.post("/balance/top-up", ac.verifyToken, uc.addBalance)
 
 module.exports = router;

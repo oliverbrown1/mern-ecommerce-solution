@@ -34,6 +34,25 @@ const itemUser2 = {
     role: "User" 
 }
 
+const profileUser = {
+    email: "profile@test.com",
+    username: "profile-test-user",
+    password: "profile-test-password",
+    role: "User"
+};
+
+const billingAddress = {
+    line1: "123 fake street",
+    line2: "Flat A",
+    city: "London",
+    postcode: "AB1 2BC",
+    country: "United Kingdom"
+}
+
+const shippingAddress = billingAddress
+
+const topUpAmount = "15.99"
+
 const missingUserId = new mg.Types.ObjectId().toString();
 
-module.exports = {loginUser1, loginUser2, cartUser, itemUser, itemUser2, missingUserId}
+module.exports = {loginUser1, loginUser2, cartUser, itemUser, itemUser2, profileUser, billingAddress, shippingAddress, topUpAmount, missingUserId}
