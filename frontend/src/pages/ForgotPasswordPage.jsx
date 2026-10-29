@@ -1,32 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 import EmailBar from '../components/input/EmailBar'
 import UsernameBar from '../components/input/UsernameBar'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const ForgotPasswordPage = () => {
-    const navigate = useNavigate();
+    const auth = useContext(AuthContext)
+    const { forgotPassword } = auth
     const [useUsername, setUseUsername] = useState(false);
-    const [user, setUser] = useState("")
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [disableButton, setDisableButton] = useState(false);
     
-    const forgotPassword = async (e) => {
+    const forgotPasswordButton = async (e) => {
         e.preventDefault();
         setDisableButton(true);
         setIsLoading(true);
         try{
-            const response = await axios.post("/auth/forgot", {
-                email: email,
-                user: user,
-                useUser: useUsername
-            });
-            console.log(response.data);
-            // store token
-            // response.data.token
+            await forgotPassword(email, username, useUsername);
         }
         catch(error){
+            setDisableButton(false);
             alert(error)
         }
         finally{
@@ -40,13 +34,13 @@ const ForgotPasswordPage = () => {
             <p className='text-sm text-center text-gray-600 mb-4'>
                 Enter your email or username and we'll send you a link to reset your password
             </p>
-            <form className='space-y-6' onSubmit={forgotPassword}>
+            <form className='space-y-6' onSubmit={forgotPasswordButton}>
                 {/* Email */}
                 {!useUsername && <EmailBar placeholder="me@example.com" update={(e) => setEmail(e.target.value)} email={email}/>}
 
 
                 {/* Username */}
-                {useUsername && <UsernameBar placeholder="me@example.com" update={(e) => setUser(e.target.value)} user={user}/>}
+                {useUsername && <UsernameBar prompt="me@example.com" update={(e) => setUsername(e.target.value)} user={username}/>}
                 
                 <button 
                 type='submit'

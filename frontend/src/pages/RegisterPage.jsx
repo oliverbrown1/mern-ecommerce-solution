@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 import EmailBar from '../components/input/EmailBar'
 import UsernameBar from '../components/input/UsernameBar'
 import PasswordBar from '../components/input/PasswordBar'
@@ -6,44 +7,40 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 const RegisterPage = () => {
+  const auth = useContext(AuthContext);
+  const { register } = auth;
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const register = async (e) => {
+  const registerButton = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try{
-      const response = await axios.post("/auth/signup", {
-        email : email,
-        user: user,
-        pwd: pwd
-      });
-      console.log(response.data);
-      // store token
-      // response.data.token
+      await register(email, username, pwd)
       navigate("/login");
     }
     catch(error){
       console.log(error);
-      alert(error.response.data.message);
+      alert(error?.response?.data?.message);
     }
     finally{
       setIsLoading(false);
     }
   }
+
   return (
     <div className='min-h-screen flex items-center justify-center p-4'>
       <div className='border p-8 rounded-lg shadow-md w-full max-w-md'>
         <h2 className='text-xl font-semibold mb-6 text-center'>Create Account</h2>
-        <form className='space-y-6' onSubmit={register}>
+        <form className='space-y-6' onSubmit={registerButton}>
           {/* Email */}
           <EmailBar placeholder="Enter your email" update={(e) => setEmail(e.target.value)} email={email}/>
 
           {/* Username */}
-          <UsernameBar prompt="Create a username" update={(e) => setUser(e.target.value)} user={user}/>
+          <UsernameBar prompt="Create a username" update={(e) => setUsername(e.target.value)} user={username}/>
 
           {/* Password */}
           <div>
