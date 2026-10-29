@@ -42,7 +42,7 @@ const HomePage = () => {
   const fetchItems = async (category) => {
     setIsLoading(true);
     try{
-      const response = await axios.get(`http://localhost:3001/items/home-screen-items/${category}`, {
+      const response = await axios.get(`/items/home-screen-items/${category}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

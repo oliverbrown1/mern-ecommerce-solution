@@ -20,7 +20,7 @@ const ItemPage = () => {
   const fetchItem = async () => {
     setIsLoading(true);
     try{
-      const response = await axios.get(`/items/item/${id}`, {
+      const response = await axios.get(`/items/get/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
