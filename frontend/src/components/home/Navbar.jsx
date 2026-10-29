@@ -6,7 +6,9 @@ import axios from "axios";
 
 const Navbar = () => {
   const auth = useContext(AuthContext);
-  const {cart, cartTotal} = useContext(CartContext);
+  const { token, logout } = auth
+  const cart = useContext(CartContext);
+  const { cartState, cartTotal } = cart;
   const [isLoading, setIsLoading] = useState(false);
   
   return (
@@ -27,7 +29,7 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /> </svg>
-                <span className="badge badge-sm indicator-item bg-red-500">10</span>
+                <span className="badge badge-sm indicator-item bg-red-500">{cartState?.items?.length ?? 0}</span>
             </div>
             </div>
             <div
@@ -39,7 +41,7 @@ const Navbar = () => {
               </div>
             ) : (
             <div className="card-body">
-                <span className="text-lg font-bold">{cart.items.length} Items</span>
+                <span className="text-lg font-bold">{cartState?.items?.length ?? 0} Items</span>
                 <span className="text-info">Subtotal: £{cartTotal}</span>
                 <div className="card-actions">
                 <a href="/checkout" className="btn btn-primary btn-block">View cart</a>
@@ -66,7 +68,7 @@ const Navbar = () => {
                 </a>
             </li>
             <li><a href="/wishlist">Wishlist</a></li>
-            <li><a href="/login" onClick={auth.logout}>Logout</a></li>
+            <li><a href="/login" onClick={logout}>Logout</a></li>
             </ul>
         </div>
         </div>

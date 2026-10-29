@@ -7,11 +7,11 @@ import ItemPage from "./pages/ItemPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
 import ProfilePage from "./pages/ProfilePage"
-import { AuthContextProvider} from "./context/AuthContext"
+import { AuthContextProvider, AuthContext} from "./context/AuthContext"
+import { CartContextProvider } from './context/CartContext'
 import ProtectedRoutes from "./utils/ProtectedRoutes"
 import PublicRoutes from "./utils/PublicRoutes"
 import { useContext } from "react"
-import { AuthContext } from "./context/AuthContext"
 
 // Remove these imports from the top
 // import { useContext } from "react"
@@ -20,17 +20,20 @@ import { AuthContext } from "./context/AuthContext"
 const App = () => {
   return (
     <AuthContextProvider>
-      <AppContent />
+      <CartContextProvider>
+        <AppContent />
+      </CartContextProvider> 
     </AuthContextProvider>
   );
 };
 
 // Create a new component that uses the context
 const AppContent = () => {
-  const user = useContext(AuthContext);
+  const auth = useContext(AuthContext);
+  const { authLoading } = auth;
   // console.log("App rendering, current user:", user);
 
-  if (user.isLoading) {
+  if (authLoading) {
     return <div data-theme="synthwave" className="flex items-center justify-center h-screen w-screen">
       <span className="loading loading-spinner loading-xl"></span>
     </div>;

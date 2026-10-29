@@ -5,11 +5,16 @@ import axios from 'axios'
 export const CartContext = React.createContext(null);
 
 export const CartContextProvider = ({children}) => {
-        const { token } = useContext(AuthContext);
-        const [cart, setCart] = useState(null);
+        const auth = useContext(AuthContext);
+        const { token, user, authLoading, redirect} = auth
+        const [cartState, setCartState] = useState(null);
         const [cartTotal, setCartTotal] = useState(0) ;
 
         const loadCartState = async () => {
+            if(redirect()){
+                return;
+            } 
+
             try{
                 const response = await axios.get("/cart/get", {
                     headers: {
@@ -18,7 +23,7 @@ export const CartContextProvider = ({children}) => {
                     'Authorization': `Bearer ${token}`
                 }});
 
-                setCart(response.data.cart);
+                setCartState(response.data.cart);
                 setCartTotal(response.data.total);
             }
             catch(error){
@@ -27,6 +32,10 @@ export const CartContextProvider = ({children}) => {
         };
 
         const addToCart = async ( itemId, quantity ) => {
+            if(redirect()){
+                return;
+            } 
+
             try{
                 const response = await axios.post("/cart/add", {
                     itemId: itemId,
@@ -48,8 +57,12 @@ export const CartContextProvider = ({children}) => {
         }
 
         const modifyCart = async (itemId, quantity) => {
+            if(redirect()){
+                return;
+            } 
+
             try{
-                const response = await axios.patch(`/cart/modify/:${itemId}`, {
+                const response = await axios.patch(`/cart/modify/${itemId}`, {
                     quantity: quantity,
                     }, {
                     headers: {
@@ -68,6 +81,10 @@ export const CartContextProvider = ({children}) => {
         }
 
         const emptyCart = async () => {
+            if(redirect()){
+                return;
+            } 
+
             try{
                 const response = await axios.delete(`/cart/empty`, {
                     headers: {
@@ -87,6 +104,10 @@ export const CartContextProvider = ({children}) => {
         };
 
         const checkoutCart = async ( useBalance ) => {
+            if(redirect()){
+                return;
+            } 
+
             try{
                 const response = await axios.post(`/cart/checkout`, {
                     useBalance : useBalance
@@ -105,14 +126,19 @@ export const CartContextProvider = ({children}) => {
             }
             loadCartState();
         };
-
         useEffect(() => {
-            loadCartState();
-        }, [token]);
+            if(token){
+                loadCartState();
+            }
+            else{
+                setCartState({items : []});
+                setCartTotal(0);
+            }
+        }, [token])
 
 
         return(
-            <CartContext.Provider value={{cart, cartTotal, addToCart, modifyCart, emptyCart, checkoutCart}}>
+            <CartContext.Provider value={{cartState, cartTotal, setCartState, setCartTotal, addToCart, modifyCart, emptyCart, checkoutCart}}>
                 {children}
             </CartContext.Provider>
         );
